@@ -64,21 +64,34 @@ products.forEach((product) => {
 productsGrid.innerHTML = productsHTML;
 
 const addToCartElem = document.querySelectorAll(".js-add-to-cart");
+const cartQuantityElem = document.querySelector(".js-cart-quantity");
 
 addToCartElem.forEach((button) => {
   button.addEventListener("click", () => {
     const productId = button.dataset.productId;
+    // Find the closest product container (parent div)
+    const productContainer = button.closest(".product-container");
+
+    // Inside that container, find the <select> element
+    const quantitySelect = productContainer.querySelector("select");
+
+    // Get the selected value (string), convert to number
+    const selectedQuantity = Number(quantitySelect.value);
 
     const matchingItem = cart.find((item) => item.productId === productId);
 
     if (matchingItem) {
-      matchingItem.quantity++;
+      matchingItem.quantity += selectedQuantity;
     } else {
       cart.push({
         productId: productId,
-        quantity: 1,
+        quantity: selectedQuantity,
       });
     }
+
+    const cartQuantity = cart.reduce((total, item) => total + item.quantity, 0);
+
+    cartQuantityElem.innerText = cartQuantity;
 
     console.log(cart);
   });
