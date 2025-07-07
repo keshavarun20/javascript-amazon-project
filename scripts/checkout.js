@@ -5,13 +5,15 @@ import { formatCurrency } from "./utils/money.js";
 const cartItemElem = document.querySelector(".order-summary");
 let cartHTML = "";
 
+if (cart.length === 0) cartHTML = "Cart is Empty";
+
 cart.forEach((cartItem) => {
   const productId = cartItem.productId;
 
   const matchingProduct = products.find((product) => product.id === productId);
 
   cartHTML += `
-  <div class="cart-item-container">
+  <div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
     <div class="delivery-date">
       Delivery date: Tuesday, June 21
     </div>
@@ -101,10 +103,14 @@ deleteCartItemElem.forEach((link) => {
     const productId = link.dataset.productId;
     deleteFromCart(productId);
 
-    const cartItemElem = link.closest(".cart-item-container");
-    if (cartItemElem) {
-      cartItemElem.remove();
+    const container = document.querySelector(
+      `.js-cart-item-container-${productId}`
+    );
+
+    container.remove();
+
+    if (cart.length === 0) {
+      cartItemElem.innerHTML = "<p class='empty-message'>Cart is Empty</p>";
     }
-    console.log(cart);
   });
 });
