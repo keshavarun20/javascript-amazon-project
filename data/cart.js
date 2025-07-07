@@ -26,3 +26,14 @@ export function addToCart(productId, selectedQuantity) {
 
   saveCart(cart);
 }
+
+
+export function deleteFromCart(productId){
+  const newCart = cart.filter((cartItem) => cartItem.productId !== productId);
+
+  cart.length = 0;
+  cart.push(...newCart);
+
+  saveCart(cart);
+  
+}
