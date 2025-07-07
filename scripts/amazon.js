@@ -1,5 +1,5 @@
+import { cart, addToCart } from "../data/cart.js";
 import { products } from "../data/products.js";
-import { cart } from "../data/cart.js";
 
 const productsGrid = document.querySelector(".products-grid");
 let productsHTML = "";
@@ -66,6 +66,15 @@ productsGrid.innerHTML = productsHTML;
 const addToCartElem = document.querySelectorAll(".js-add-to-cart");
 const cartQuantityElem = document.querySelector(".js-cart-quantity");
 
+function updateCartQuantity() {
+  const cartQuantity = cart.reduce(
+    (total, cartItem) => total + cartItem.quantity,
+    0
+  );
+
+  cartQuantityElem.innerText = cartQuantity;
+}
+
 addToCartElem.forEach((button) => {
   button.addEventListener("click", () => {
     const productId = button.dataset.productId;
@@ -78,20 +87,9 @@ addToCartElem.forEach((button) => {
     // Get the selected value (string), convert to number
     const selectedQuantity = Number(quantitySelect.value);
 
-    const matchingItem = cart.find((item) => item.productId === productId);
+    addToCart(productId, selectedQuantity);
 
-    if (matchingItem) {
-      matchingItem.quantity += selectedQuantity;
-    } else {
-      cart.push({
-        productId: productId,
-        quantity: selectedQuantity,
-      });
-    }
-
-    const cartQuantity = cart.reduce((total, item) => total + item.quantity, 0);
-
-    cartQuantityElem.innerText = cartQuantity;
+    updateCartQuantity();
 
     console.log(cart);
   });
