@@ -1,5 +1,15 @@
-export const cart = [];
+function loadCart() {
+  return JSON.parse(localStorage.getItem("cart")) || [];
+}
 
+function saveCart(cart) {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+// Use this to get the cart
+export const cart = loadCart();
+
+// Use this to add items
 export function addToCart(productId, selectedQuantity) {
   const matchingItem = cart.find(
     (cartItem) => cartItem.productId === productId
@@ -13,4 +23,6 @@ export function addToCart(productId, selectedQuantity) {
       quantity: selectedQuantity,
     });
   }
+
+  saveCart(cart);
 }
