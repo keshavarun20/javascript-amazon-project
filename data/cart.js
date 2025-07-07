@@ -37,3 +37,13 @@ export function deleteFromCart(productId){
   saveCart(cart);
   
 }
+
+export function updateTheCart(productId,updatedQuantity){
+  const matchingItem = cart.find(
+    (cartItem) => cartItem.productId === productId
+  );
+
+  matchingItem.quantity = updatedQuantity;
+  
+  saveCart(cart);
+}
