@@ -15,3 +15,11 @@ export const deliveryOptions = [
     priceCents: 999,
   }
 ];
+
+export function getDeliveryOption(deliveryOptionId){
+  const matchingDeliveryDate = deliveryOptions.find(
+    (deliveryOption) => deliveryOption.id === deliveryOptionId
+  );
+
+  return matchingDeliveryDate || deliveryOptions[0];
+}
