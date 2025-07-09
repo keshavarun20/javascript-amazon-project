@@ -21,29 +21,38 @@ export function addToCart(productId, selectedQuantity) {
     cart.push({
       productId: productId,
       quantity: selectedQuantity,
+      deliveryOptionId: "1",
     });
   }
 
   saveCart(cart);
 }
 
-
-export function deleteFromCart(productId){
+export function deleteFromCart(productId) {
   const newCart = cart.filter((cartItem) => cartItem.productId !== productId);
 
   cart.length = 0;
   cart.push(...newCart);
 
   saveCart(cart);
-  
 }
 
-export function updateTheCart(productId,updatedQuantity){
+export function updateTheCart(productId, updatedQuantity) {
   const matchingItem = cart.find(
     (cartItem) => cartItem.productId === productId
   );
 
   matchingItem.quantity = updatedQuantity;
-  
+
+  saveCart(cart);
+}
+
+export function updateDeliveryOption(productId, deliveryOptionId) {
+  const matchingItem = cart.find(
+    (cartItem) => cartItem.productId === productId
+  );
+
+  matchingItem.deliveryOptionId = deliveryOptionId;
+
   saveCart(cart);
 }
