@@ -3,6 +3,7 @@ import { getProduct } from "../../data/products.js";
 import { getDeliveryOption } from "../../data/deliveryOptions.js";
 
 export function renderPaymentSummery() {
+  const items = cart.length;
   let productPriceCents = 0;
   let shippingPriceCents = 0;
   cart.forEach((cartItem) => {
@@ -23,7 +24,7 @@ export function renderPaymentSummery() {
   <div class="payment-summary-title">Order Summary</div>
 
     <div class="payment-summary-row">
-      <div>Items (3):</div>
+      <div>Items (${items}):</div>
       <div class="payment-summary-money">$${(productPriceCents / 100).toFixed(
         2
       )}</div>
