@@ -11,6 +11,7 @@ import {
   deliveryOptions,
   getDeliveryOption,
 } from "../../data/deliveryOptions.js";
+import { renderPaymentSummery } from "./paymentSummary.js";
 
 const cartItemElem = document.querySelector(".order-summary");
 
@@ -103,6 +104,7 @@ export function renderOrderSummery() {
       );
 
       container.remove();
+      renderPaymentSummery();
 
       if (cart.length === 0) {
         cartItemElem.innerHTML = "<p class='empty-message'>Cart is Empty</p>";
@@ -145,6 +147,7 @@ export function renderOrderSummery() {
       const newQuantity = Number(quantityInput.value);
 
       updateTheCart(productId, newQuantity);
+      renderPaymentSummery();
 
       const quantityLabel = container.querySelector(".quantity-label");
       quantityLabel.innerText = newQuantity;
@@ -201,6 +204,7 @@ export function renderOrderSummery() {
 
       updateDeliveryOption(productId, deliveryOptionId);
       renderOrderSummery();
+      renderPaymentSummery();
     });
   });
 }
