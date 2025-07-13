@@ -13,11 +13,10 @@ import {
 } from "../../data/deliveryOptions.js";
 import { renderPaymentSummery } from "./paymentSummary.js";
 
-const cartItemElem = document.querySelector(".order-summary");
-
 export function renderOrderSummery() {
-  document.querySelector(".js-return-to-home-link").innerHTML = `${cart.length} Items`;
-  let cartHTML = "";
+  const cartItemElem = document.querySelector(".order-summary");
+  // document.querySelector(".js-return-to-home-link").innerHTML = `${cart.length} Items`;
+   let cartHTML = "";
 
   if (cart.length === 0) cartHTML = "Cart is Empty";
 
