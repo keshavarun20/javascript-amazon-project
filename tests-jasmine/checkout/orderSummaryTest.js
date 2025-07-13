@@ -1,7 +1,10 @@
 import { renderOrderSummery } from "../../scripts/checkout/orderSummary.js";
+import { cart } from "../../data/cart.js";
 
 describe("test suite: renderOrderSummary", () => {
+  //spyOn(localStorage, "setItem");
   it("displays the cart", () => {
+    cart;
     document.querySelector(".js-test-container").innerHTML = `
     <div class ='order-summary'></div>
     `;
@@ -15,7 +18,8 @@ describe("test suite: renderOrderSummary", () => {
       ]);
     });
     renderOrderSummery();
+    //expect(localStorage.setItem).toHaveBeenCalledTimes(1);
 
-    document.querySelectorAll('')
+    //document.querySelectorAll('')
   });
 });
