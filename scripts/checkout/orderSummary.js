@@ -16,7 +16,7 @@ import { renderPaymentSummery } from "./paymentSummary.js";
 export function renderOrderSummery() {
   const cartItemElem = document.querySelector(".order-summary");
   // document.querySelector(".js-return-to-home-link").innerHTML = `${cart.length} Items`;
-   let cartHTML = "";
+  let cartHTML = "";
 
   if (cart.length === 0) cartHTML = "Cart is Empty";
 
@@ -51,7 +51,7 @@ export function renderOrderSummery() {
           ${matchingProduct.name}
         </div>
         <div class="product-price">
-          $${formatCurrency(matchingProduct.priceCents)}
+          ${matchingProduct.getPrice()}
         </div>
         <div class="product-quantity">
           <span>
