@@ -3,9 +3,8 @@ import { products, loadProductsFetch } from "../data/products.js";
 
 const productsGrid = document.querySelector(".products-grid");
 
-loadProductsFetch().then(() => {
-  renderProductsGrid();
-});
+await loadProductsFetch();
+renderProductsGrid();
 
 function renderProductsGrid() {
   let productsHTML = "";

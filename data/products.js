@@ -526,23 +526,30 @@ export const products = [
 
 export let products = [];
 
-export function loadProductsFetch() {
-  const promise = fetch("https://supersimplebackend.dev/products")
-    .then((response) => {
-      return response.json(); // async returns a promise
-    })
+export async function loadProductsFetch() {
+  try {
+    const response = await fetch(
+      "https://jsonplaceholder.typicode.com/invalid-endpoint"
+    );
 
-    .then((productsData) => {
-      products = productsData.map((productDetails) => {
-        if (productDetails.type === "clothing") {
-          return new Clothing(productDetails);
-        }
-        return new Product(productDetails);
-      });
-      console.log("load Products");
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const productsData = await response.json();
+
+    products = productsData.map((productDetails) => {
+      if (productDetails.type === "clothing") {
+        return new Clothing(productDetails);
+      }
+      return new Product(productDetails);
     });
 
-  return promise;
+    console.log("load Products");
+
+  } catch (error) {
+    console.error("Failed to load products:", error);
+  }
 }
 
 // loadProductsFetch().then(() => {
