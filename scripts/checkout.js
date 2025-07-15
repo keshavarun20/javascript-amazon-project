@@ -4,18 +4,34 @@ import { loadProductsFetch } from "../data/products.js";
 import { loadCartss } from "../data/cart.js";
 //import "../data/cart-oop.js";
 //import '../data/be.js'
-
-Promise.all([
-  loadProductsFetch(),
-  new Promise((resolve) => {
+async function loadPage() {
+  // basically warps the code into a promise like returns a promise
+  await loadProductsFetch(); //await let us to write async code like a regular code
+  await new Promise((resolve) => {
     loadCartss(() => {
       resolve();
     });
-  }),
-]).then(() => {
+  });
   renderOrderSummery();
   renderPaymentSummery();
-});
+  //return "value1"; // this wraps as resolve('value')
+}
+loadPage();
+
+//async let us to use await
+//We can only use await inside async function.
+
+// Promise.all([
+//   loadProductsFetch(),
+//   new Promise((resolve) => {
+//     loadCartss(() => {
+//       resolve();
+//     });
+//   }),
+// ]).then(() => {
+//   renderOrderSummery();
+//   renderPaymentSummery();
+// });
 
 // new Promise((resolve) => {
 //   loadProducts(() => {
