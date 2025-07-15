@@ -1,10 +1,12 @@
 import { renderOrderSummery } from "../../scripts/checkout/orderSummary.js";
 import { cart } from "../../data/cart.js";
-import { loadProducts } from "../../data/products.js";
+import { loadProductsFetch } from "../../data/products.js";
 describe("test suite: renderOrderSummary", () => {
   //spyOn(localStorage, "setItem");
   beforeAll((done) => {
-    loadProducts(renderOrderSummery);
+    loadProductsFetch().then(() => {
+      renderOrderSummery();
+    });
     done();
   });
   it("displays the cart", () => {

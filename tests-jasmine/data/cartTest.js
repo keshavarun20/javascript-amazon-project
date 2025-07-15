@@ -1,9 +1,11 @@
 import { addToCart, cart } from "../../data/cart.js";
-import { loadProducts } from "../../data/products.js";
+import { loadProductsFetch } from "../../data/products.js";
 
 describe("test suite: addToCart", () => {
   beforeAll((done) => {
-    loadProducts(addToCart);
+    loadProductsFetch().then(() => {
+      addToCart();
+    });
     done();
   });
   it("adds and existing product to the cart", () => {
