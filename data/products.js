@@ -528,9 +528,7 @@ export let products = [];
 
 export async function loadProductsFetch() {
   try {
-    const response = await fetch(
-      "https://jsonplaceholder.typicode.com/invalid-endpoint"
-    );
+    const response = await fetch("https://supersimplebackend.dev/products");
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -546,7 +544,6 @@ export async function loadProductsFetch() {
     });
 
     console.log("load Products");
-
   } catch (error) {
     console.error("Failed to load products:", error);
   }

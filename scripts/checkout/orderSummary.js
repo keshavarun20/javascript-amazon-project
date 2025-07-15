@@ -15,7 +15,7 @@ import { renderPaymentSummery } from "./paymentSummary.js";
 
 export function renderOrderSummery() {
   const cartItemElem = document.querySelector(".order-summary");
-  // document.querySelector(".js-return-to-home-link").innerHTML = `${cart.length} Items`;
+  document.querySelector(".js-return-to-home-link").innerHTML = `${cart.length} Items`;
   let cartHTML = "";
 
   if (cart.length === 0) cartHTML = "Cart is Empty";
