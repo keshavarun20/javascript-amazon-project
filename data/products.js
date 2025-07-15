@@ -45,22 +45,6 @@ class Clothing extends Product {
   }
 }
 
-const tShirt = new Clothing({
-  id: "5968897c-4d27-4872-89f6-5bcb052746d7",
-  image: "images/products/women-chiffon-beachwear-coverup-black.jpg",
-  name: "Women's Chiffon Beachwear Cover Up - Black",
-  rating: {
-    stars: 4.5,
-    count: 235,
-  },
-  priceCents: 2070,
-  keywords: ["robe", "swimsuit", "swimming", "bathing", "apparel"],
-  type: "clothing",
-  sizeChartLink: "images/clothing-size-chart.png",
-});
-
-console.log(tShirt);
-
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
