@@ -1,6 +1,11 @@
 import { addToCart, cart } from "../../data/cart.js";
+import { loadProducts } from "../../data/products.js";
 
 describe("test suite: addToCart", () => {
+  beforeAll((done) => {
+    loadProducts(addToCart);
+    done();
+  });
   it("adds and existing product to the cart", () => {
     spyOn(localStorage, "setItem");
     spyOn(localStorage, "getItem").and.callFake(() => {

@@ -1,8 +1,12 @@
 import { renderOrderSummery } from "../../scripts/checkout/orderSummary.js";
 import { cart } from "../../data/cart.js";
-
+import { loadProducts } from "../../data/products.js";
 describe("test suite: renderOrderSummary", () => {
   //spyOn(localStorage, "setItem");
+  beforeAll((done) => {
+    loadProducts(renderOrderSummery);
+    done();
+  });
   it("displays the cart", () => {
     cart;
     document.querySelector(".js-test-container").innerHTML = `

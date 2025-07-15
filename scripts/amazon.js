@@ -1,11 +1,15 @@
 import { cart, addToCart } from "../data/cart.js";
-import { products } from "../data/products.js";
+import { products, loadProducts } from "../data/products.js";
 
 const productsGrid = document.querySelector(".products-grid");
-let productsHTML = "";
 
-products.forEach((product) => {
-  productsHTML += `
+loadProducts(renderProductsGrid);
+
+function renderProductsGrid() {
+  let productsHTML = "";
+
+  products.forEach((product) => {
+    productsHTML += `
     <div class="product-container">
       <div class="product-image-container">
         <img
@@ -61,38 +65,39 @@ products.forEach((product) => {
       </button>
     </div>
   `;
-});
-
-productsGrid.innerHTML = productsHTML;
-
-const addToCartElem = document.querySelectorAll(".js-add-to-cart");
-const cartQuantityElem = document.querySelector(".js-cart-quantity");
-
-function updateCartQuantity() {
-  const cartQuantity = cart.reduce(
-    (total, cartItem) => total + cartItem.quantity,
-    0
-  );
-
-  cartQuantityElem.innerText = cartQuantity;
-}
-
-addToCartElem.forEach((button) => {
-  button.addEventListener("click", () => {
-    const productId = button.dataset.productId;
-    // Find the closest product container (parent div)
-    const productContainer = button.closest(".product-container");
-
-    // Inside that container, find the <select> element
-    const quantitySelect = productContainer.querySelector("select");
-
-    // Get the selected value (string), convert to number
-    const selectedQuantity = Number(quantitySelect.value);
-
-    addToCart(productId, selectedQuantity);
-
-    updateCartQuantity();
-
-    console.log(cart);
   });
-});
+
+  productsGrid.innerHTML = productsHTML;
+
+  const addToCartElem = document.querySelectorAll(".js-add-to-cart");
+  const cartQuantityElem = document.querySelector(".js-cart-quantity");
+
+  function updateCartQuantity() {
+    const cartQuantity = cart.reduce(
+      (total, cartItem) => total + cartItem.quantity,
+      0
+    );
+
+    cartQuantityElem.innerText = cartQuantity;
+  }
+
+  addToCartElem.forEach((button) => {
+    button.addEventListener("click", () => {
+      const productId = button.dataset.productId;
+      // Find the closest product container (parent div)
+      const productContainer = button.closest(".product-container");
+
+      // Inside that container, find the <select> element
+      const quantitySelect = productContainer.querySelector("select");
+
+      // Get the selected value (string), convert to number
+      const selectedQuantity = Number(quantitySelect.value);
+
+      addToCart(productId, selectedQuantity);
+
+      updateCartQuantity();
+
+      console.log(cart);
+    });
+  });
+}
