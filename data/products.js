@@ -25,9 +25,41 @@ class Product {
   }
 
   getPrice() {
-    return `$${formatCurrency(this.priceCents)}`
+    return `$${formatCurrency(this.priceCents)}`;
+  }
+
+  extraInfoHTML() {
+    return "";
   }
 }
+
+class Clothing extends Product {
+  sizeChartLink;
+  constructor(productDetails) {
+    super(productDetails);
+    this.sizeChartLink = productDetails.sizeChartLink;
+  }
+
+  extraInfoHTML() {
+    return `<a href="${this.sizeChartLink}" target="_blank"> Size Chart </a>`;
+  }
+}
+
+const tShirt = new Clothing({
+  id: "5968897c-4d27-4872-89f6-5bcb052746d7",
+  image: "images/products/women-chiffon-beachwear-coverup-black.jpg",
+  name: "Women's Chiffon Beachwear Cover Up - Black",
+  rating: {
+    stars: 4.5,
+    count: 235,
+  },
+  priceCents: 2070,
+  keywords: ["robe", "swimsuit", "swimming", "bathing", "apparel"],
+  type: "clothing",
+  sizeChartLink: "images/clothing-size-chart.png",
+});
+
+console.log(tShirt);
 
 export const products = [
   {
@@ -501,5 +533,8 @@ export const products = [
     keywords: ["sweaters", "hoodies", "apparel", "mens"],
   },
 ].map((productDetails) => {
+  if (productDetails.type === "clothing") {
+    return new Clothing(productDetails);
+  }
   return new Product(productDetails);
 });
